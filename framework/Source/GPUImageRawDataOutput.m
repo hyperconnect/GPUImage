@@ -140,6 +140,7 @@
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     [firstInputFramebuffer unlock];
+    [outputFramebuffer unlock];
 }
 
 - (GPUByteColorVector)colorAtLocation:(CGPoint)locationInImage;
