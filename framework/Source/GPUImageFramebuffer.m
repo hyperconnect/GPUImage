@@ -149,7 +149,13 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
             attrs = CFDictionaryCreateMutable(kCFAllocatorDefault, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
             CFDictionarySetValue(attrs, kCVPixelBufferIOSurfacePropertiesKey, empty);
             
-            CVReturn err = CVPixelBufferCreate(kCFAllocatorDefault, (int)_size.width, (int)_size.height, kCVPixelFormatType_32BGRA, attrs, &renderTarget);
+            OSType pixelFormat = kCVPixelFormatType_32BGRA;
+            if (_textureOptions.format == GL_RED_EXT) {
+                pixelFormat = kCVPixelFormatType_OneComponent8;
+            } else if (_textureOptions.format == GL_RG_EXT) {
+                pixelFormat = kCVPixelFormatType_TwoComponent8;
+            }
+            CVReturn err = CVPixelBufferCreate(kCFAllocatorDefault, (int)_size.width, (int)_size.height, pixelFormat, attrs, &renderTarget);
             if (err)
             {
                 NSLog(@"FBO size: %f, %f", _size.width, _size.height);
