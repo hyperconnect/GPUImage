@@ -8,7 +8,6 @@ Pod::Spec.new do |s|
   s.source   = { :git => 'https://github.com/hyperconnect/GPUImage.git', :branch => "cocoapods" }
 
   s.source_files = 'framework/Source/**/*.{h,m}'
-  s.resources = 'framework/Resources/*.png'
   s.requires_arc = true
   s.xcconfig = { 'CLANG_MODULES_AUTOLINK' => 'YES' }
 
