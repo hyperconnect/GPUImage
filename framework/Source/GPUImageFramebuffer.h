@@ -37,6 +37,7 @@ typedef struct GPUTextureOptions {
 
 // Usage
 - (void)activateFramebuffer;
+- (GLuint)fbo;
 
 // Reference counting
 - (void)lock;

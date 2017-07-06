@@ -197,7 +197,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
             glTexImage2D(GL_TEXTURE_2D, 0, _textureOptions.internalFormat, (int)_size.width, (int)_size.height, 0, _textureOptions.format, _textureOptions.type, 0);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _texture, 0);
         }
-        
+
         #ifndef NS_BLOCK_ASSERTIONS
         GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         NSAssert(status == GL_FRAMEBUFFER_COMPLETE, @"Incomplete filter FBO: %d", status);
@@ -218,7 +218,6 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
             framebuffer = 0;
         }
 
-        
         if ([GPUImageContext supportsFastTextureUpload] && (!_missingFramebuffer))
         {
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
@@ -250,6 +249,11 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
 {
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     glViewport(0, 0, (int)_size.width, (int)_size.height);
+}
+
+- (GLuint)fbo
+{
+    return framebuffer;
 }
 
 #pragma mark -
