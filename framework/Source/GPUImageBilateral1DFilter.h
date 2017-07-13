@@ -5,6 +5,7 @@
 
 #import "GPUImageFilter.h"
 
+extern CGFloat const kGPUImageBilateralDefaultDistanceNormalizationFactor;
 extern NSString *const kGPUImageBilateral1DVertexShaderString;
 extern NSString *const kGPUImageBilateral1DFragmentShaderString;
 
