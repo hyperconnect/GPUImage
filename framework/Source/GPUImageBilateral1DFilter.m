@@ -5,6 +5,8 @@
 
 #import "GPUImageBilateral1DFilter.h"
 
+CGFloat const kGPUImageBilateralDefaultDistanceNormalizationFactor = 10.0;
+
 NSString *const kGPUImageBilateral1DVertexShaderString = SHADER_STRING
 (
  precision mediump float;
@@ -101,7 +103,7 @@ NSString *const kGPUImageBilateral1DFragmentShaderString = SHADER_STRING
 {
     return [self initWithDirection: direction
                      texelStepSize: texelStepSize
-       distanceNormalizationFactor: 10];
+       distanceNormalizationFactor: kGPUImageBilateralDefaultDistanceNormalizationFactor];
 }
 
 - (void)setUniformsForProgramAtIndex:(NSUInteger)programIndex;
