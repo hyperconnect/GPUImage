@@ -11,5 +11,6 @@
 }
 @property (nonatomic, assign) CGSize texelStepSize;
 
+- (id)initWithTexelStepSize:(CGSize)texelStepSize fragmentShaderFromString:(NSString *)fragmentShaderString;
 - (id)initWithFrameSize:(CGSize)frameSize fragmentShaderFromString:(NSString *)fragmentShaderString;
 @end
