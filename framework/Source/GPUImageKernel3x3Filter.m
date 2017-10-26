@@ -33,7 +33,7 @@ NSString *const kGPUImageKernel3x3VertexShaderString = SHADER_STRING
 
 @implementation GPUImageKernel3x3Filter
 
-- (id)initWithTexelStepSize:(CGSize)texelStepSize FragmentShaderFromString:(NSString *)fragmentShaderString;
+- (id)initWithTexelStepSize:(CGSize)texelStepSize fragmentShaderFromString:(NSString *)fragmentShaderString
 {
     if (!(self = [super initWithVertexShaderFromString: kGPUImageKernel3x3VertexShaderString
                               fragmentShaderFromString: fragmentShaderString]))
@@ -55,7 +55,7 @@ NSString *const kGPUImageKernel3x3VertexShaderString = SHADER_STRING
 - (id)initWithFrameSize:(CGSize)frameSize fragmentShaderFromString:(NSString *)fragmentShaderString
 {
     return [self initWithTexelStepSize: CGSizeMake(1.0 / frameSize.width, 1.0 / frameSize.height)
-              FragmentShaderFromString:fragmentShaderString];
+              fragmentShaderFromString:fragmentShaderString];
 }
 
 - (void)setUniformsForProgramAtIndex:(NSUInteger)programIndex;
