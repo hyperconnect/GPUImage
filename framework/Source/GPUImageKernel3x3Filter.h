@@ -3,7 +3,7 @@
 //  Copyright © 2017 Hyperconnect. All rights reserved.
 //
 
-#import <GPUImage/GPUImage.h>
+#import "GPUImageFilter.h"
 
 @interface GPUImageKernel3x3Filter : GPUImageFilter
 {
