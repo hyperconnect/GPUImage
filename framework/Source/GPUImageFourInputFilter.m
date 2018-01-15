@@ -68,7 +68,6 @@ NSString *const kGPUImageFourInputTextureVertexShaderString = SHADER_STRING
         filterFourthTextureCoordinateAttribute = [filterProgram attributeIndex:@"inputTextureCoordinate4"];
 
         filterInputTextureUniform4 = [filterProgram uniformIndex:@"inputImageTexture4"]; // This does assume a name of "inputImageTexture4" for the third input texture in the fragment shader
-        glEnableVertexAttribArray(filterFourthTextureCoordinateAttribute);
     });
 
     return self;
@@ -134,7 +133,20 @@ NSString *const kGPUImageFourInputTextureVertexShaderString = SHADER_STRING
     glVertexAttribPointer(filterThirdTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [[self class] textureCoordinatesForRotation:inputRotation3]);
     glVertexAttribPointer(filterFourthTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [[self class] textureCoordinatesForRotation:inputRotation4]);
 
+    glEnableVertexAttribArray(filterPositionAttribute);
+    glEnableVertexAttribArray(filterTextureCoordinateAttribute);
+    glEnableVertexAttribArray(filterSecondTextureCoordinateAttribute);
+    glEnableVertexAttribArray(filterThirdTextureCoordinateAttribute);
+    glEnableVertexAttribArray(filterFourthTextureCoordinateAttribute);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(filterPositionAttribute);
+    glDisableVertexAttribArray(filterTextureCoordinateAttribute);
+    glDisableVertexAttribArray(filterSecondTextureCoordinateAttribute);
+    glDisableVertexAttribArray(filterThirdTextureCoordinateAttribute);
+    glDisableVertexAttribArray(filterFourthTextureCoordinateAttribute);
+
     [firstInputFramebuffer unlock];
     [secondInputFramebuffer unlock];
     [thirdInputFramebuffer unlock];

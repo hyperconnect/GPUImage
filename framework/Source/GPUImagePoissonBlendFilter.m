@@ -166,8 +166,16 @@ NSString *const kGPUImagePoissonBlendFragmentShaderString = SHADER_STRING
             glVertexAttribPointer(filterPositionAttribute, 2, GL_FLOAT, 0, 0, vertices);
             glVertexAttribPointer(filterTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [[self class] textureCoordinatesForRotation:kGPUImageNoRotation]);
             glVertexAttribPointer(filterSecondTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [[self class] textureCoordinatesForRotation:inputRotation2]);
-            
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);            
+
+            glEnableVertexAttribArray(filterPositionAttribute);
+            glEnableVertexAttribArray(filterTextureCoordinateAttribute);
+            glEnableVertexAttribArray(filterSecondTextureCoordinateAttribute);
+
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+            glDisableVertexAttribArray(filterPositionAttribute);
+            glDisableVertexAttribArray(filterTextureCoordinateAttribute);
+            glDisableVertexAttribArray(filterSecondTextureCoordinateAttribute);
         }
     }
 }

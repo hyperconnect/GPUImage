@@ -197,7 +197,13 @@ NSString *const kGPUImageLanczosFragmentShaderString = SHADER_STRING
     glVertexAttribPointer(filterPositionAttribute, 2, GL_FLOAT, 0, 0, vertices);
 	glVertexAttribPointer(filterTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, textureCoordinates);
     
+    glEnableVertexAttribArray(filterPositionAttribute);
+    glEnableVertexAttribArray(filterTextureCoordinateAttribute);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(filterPositionAttribute);
+    glDisableVertexAttribArray(filterTextureCoordinateAttribute);
     
     [firstInputFramebuffer unlock];
     
@@ -226,8 +232,15 @@ NSString *const kGPUImageLanczosFragmentShaderString = SHADER_STRING
     
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    
+
+    glEnableVertexAttribArray(secondFilterPositionAttribute);
+    glEnableVertexAttribArray(secondFilterTextureCoordinateAttribute);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(secondFilterPositionAttribute);
+    glDisableVertexAttribArray(secondFilterTextureCoordinateAttribute);
+
     [outputFramebuffer unlock];
     outputFramebuffer = nil;
     if (usingNextFrameForImageCapture)

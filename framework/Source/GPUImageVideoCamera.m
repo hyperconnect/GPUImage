@@ -268,11 +268,6 @@ NSString *const kGPUImageYUVVideoRangeConversionForLAFragmentShaderString = SHAD
             yuvConversionLuminanceTextureUniform = [yuvConversionProgram uniformIndex:@"luminanceTexture"];
             yuvConversionChrominanceTextureUniform = [yuvConversionProgram uniformIndex:@"chrominanceTexture"];
             yuvConversionMatrixUniform = [yuvConversionProgram uniformIndex:@"colorConversionMatrix"];
-            
-            [GPUImageContext setActiveShaderProgram:yuvConversionProgram];
-            
-            glEnableVertexAttribArray(yuvConversionPositionAttribute);
-            glEnableVertexAttribArray(yuvConversionTextureCoordinateAttribute);
         }
     });
     
@@ -914,8 +909,14 @@ NSString *const kGPUImageYUVVideoRangeConversionForLAFragmentShaderString = SHAD
 
     glVertexAttribPointer(yuvConversionPositionAttribute, 2, GL_FLOAT, 0, 0, squareVertices);
 	glVertexAttribPointer(yuvConversionTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [GPUImageFilter textureCoordinatesForRotation:internalRotation]);
-    
+
+    glEnableVertexAttribArray(yuvConversionPositionAttribute);
+    glEnableVertexAttribArray(yuvConversionTextureCoordinateAttribute);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(yuvConversionPositionAttribute);
+    glDisableVertexAttribArray(yuvConversionTextureCoordinateAttribute);
 }
 
 #pragma mark -

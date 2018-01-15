@@ -198,6 +198,9 @@ static const GLfloat textureCoordinates[] = {
     glEnableVertexAttribArray(dataTextureCoordinateAttribute[idx]);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(dataPositionAttribute[idx]);
+    glDisableVertexAttribArray(dataTextureCoordinateAttribute[idx]);
     
     [outputFramebuffer[idx] unlock];
 }

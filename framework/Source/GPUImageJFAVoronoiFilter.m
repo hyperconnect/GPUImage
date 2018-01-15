@@ -414,9 +414,15 @@ NSString *const kGPUImageJFAVoronoiFragmentShaderString = SHADER_STRING
     
     glVertexAttribPointer(filterPositionAttribute, 2, GL_FLOAT, 0, 0, vertices);
     glVertexAttribPointer(filterTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, textureCoordinates);
-    
+
+    glEnableVertexAttribArray(filterPositionAttribute);
+    glEnableVertexAttribArray(filterTextureCoordinateAttribute);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    
+
+    glDisableVertexAttribArray(filterPositionAttribute);
+    glDisableVertexAttribArray(filterTextureCoordinateAttribute);
+
     for (int pass = 1; pass <= numPasses + 1; pass++) {
         currentPass = pass;
 //        [self setOutputFBO];
@@ -438,8 +444,14 @@ NSString *const kGPUImageJFAVoronoiFragmentShaderString = SHADER_STRING
         
         glVertexAttribPointer(filterPositionAttribute, 2, GL_FLOAT, 0, 0, vertices);
         glVertexAttribPointer(filterTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, textureCoordinates);
-        
+
+        glEnableVertexAttribArray(filterPositionAttribute);
+        glEnableVertexAttribArray(filterTextureCoordinateAttribute);
+
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+        glDisableVertexAttribArray(filterPositionAttribute);
+        glDisableVertexAttribArray(filterTextureCoordinateAttribute);
     }
 }
 
