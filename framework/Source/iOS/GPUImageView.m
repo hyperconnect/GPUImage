@@ -119,10 +119,6 @@
         displayPositionAttribute = [displayProgram attributeIndex:@"position"];
         displayTextureCoordinateAttribute = [displayProgram attributeIndex:@"inputTextureCoordinate"];
         displayInputTextureUniform = [displayProgram uniformIndex:@"inputImageTexture"]; // This does assume a name of "inputTexture" for the fragment shader
-
-        [GPUImageContext setActiveShaderProgram:displayProgram];
-        glEnableVertexAttribArray(displayPositionAttribute);
-        glEnableVertexAttribArray(displayTextureCoordinateAttribute);
         
         [self setBackgroundColorRed:0.0 green:0.0 blue:0.0 alpha:1.0];
         _fillMode = kGPUImageFillModePreserveAspectRatio;
@@ -381,8 +377,14 @@
         
         glVertexAttribPointer(displayPositionAttribute, 2, GL_FLOAT, 0, 0, imageVertices);
         glVertexAttribPointer(displayTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [GPUImageView textureCoordinatesForRotation:inputRotation]);
-        
+
+        glEnableVertexAttribArray(displayPositionAttribute);
+        glEnableVertexAttribArray(displayTextureCoordinateAttribute);
+
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+        glDisableVertexAttribArray(displayPositionAttribute);
+        glDisableVertexAttribArray(displayTextureCoordinateAttribute);
         
         [self presentFramebuffer];
         [inputFramebufferForDisplay unlock];

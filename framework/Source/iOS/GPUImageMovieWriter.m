@@ -130,11 +130,6 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         colorSwizzlingPositionAttribute = [colorSwizzlingProgram attributeIndex:@"position"];
         colorSwizzlingTextureCoordinateAttribute = [colorSwizzlingProgram attributeIndex:@"inputTextureCoordinate"];
         colorSwizzlingInputTextureUniform = [colorSwizzlingProgram uniformIndex:@"inputImageTexture"];
-        
-        [_movieWriterContext setContextShaderProgram:colorSwizzlingProgram];
-        
-        glEnableVertexAttribArray(colorSwizzlingPositionAttribute);
-        glEnableVertexAttribArray(colorSwizzlingTextureCoordinateAttribute);
     });
         
     [self initializeMovieWithOutputSettings:outputSettings];
@@ -657,7 +652,14 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
     glVertexAttribPointer(colorSwizzlingPositionAttribute, 2, GL_FLOAT, 0, 0, squareVertices);
 	glVertexAttribPointer(colorSwizzlingTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, textureCoordinates);
     
+    glEnableVertexAttribArray(colorSwizzlingPositionAttribute);
+    glEnableVertexAttribArray(colorSwizzlingTextureCoordinateAttribute);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(colorSwizzlingPositionAttribute);
+    glDisableVertexAttribArray(colorSwizzlingTextureCoordinateAttribute);
+
     glFinish();
 }
 

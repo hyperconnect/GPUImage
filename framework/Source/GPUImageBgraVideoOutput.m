@@ -246,9 +246,6 @@ NSString *const kGPUImageBgraConversionFragmentShaderStr = SHADER_STRING
         yuvConversionVTextureUniformI420 = [yuvConversionProgramI420 uniformIndex:@"vTexture"];
         yuvConversionMatrixUniformI420 = [yuvConversionProgramI420 uniformIndex:@"colorConversionMatrix"];
 
-        glEnableVertexAttribArray(yuvConversionPositionAttributeI420);
-        glEnableVertexAttribArray(yuvConversionTextureCoordinateAttributeI420);
-
         glGenTextures(3, texturesI420);
         // Set parameters for each of the textures we created.
         for (GLsizei i = 0; i < 3; i++) {
@@ -294,9 +291,6 @@ NSString *const kGPUImageBgraConversionFragmentShaderStr = SHADER_STRING
         yuvConversionChrominanceTextureUniformNV12 = [yuvConversionProgramNV12 uniformIndex:@"chrominanceTexture"];
         yuvConversionMatrixUniformNV12 = [yuvConversionProgramNV12 uniformIndex:@"colorConversionMatrix"];
 
-        glEnableVertexAttribArray(yuvConversionPositionAttributeNV12);
-        glEnableVertexAttribArray(yuvConversionTextureCoordinateAttributeNV12);
-
         bgraConversionProgram = [[GPUImageContext sharedImageProcessingContext] programForVertexShaderString:kGPUImageVertexShaderString fragmentShaderString:
                                  kGPUImageBgraConversionFragmentShaderStr];
 
@@ -319,9 +313,6 @@ NSString *const kGPUImageBgraConversionFragmentShaderStr = SHADER_STRING
         bgraConversionPositionAttribute = [bgraConversionProgram attributeIndex:@"position"];
         bgraConversionTextureCoordinateAttribute = [bgraConversionProgram attributeIndex:@"inputTextureCoordinate"];
         bgraConversionTextureUniform = [bgraConversionProgram uniformIndex:@"bgraTexture"];
-
-        glEnableVertexAttribArray(bgraConversionPositionAttribute);
-        glEnableVertexAttribArray(bgraConversionTextureCoordinateAttribute);
 
         check_gl_error();
 
@@ -793,7 +784,13 @@ NSString *const kGPUImageBgraConversionFragmentShaderStr = SHADER_STRING
     glVertexAttribPointer(yuvConversionPositionAttributeNV12, 2, GL_FLOAT, 0, 0, squareVertices);
     glVertexAttribPointer(yuvConversionTextureCoordinateAttributeNV12, 2, GL_FLOAT, 0, 0, [GPUImageFilter textureCoordinatesForRotation:internalRotation]);
 
+    glEnableVertexAttribArray(yuvConversionPositionAttributeNV12);
+    glEnableVertexAttribArray(yuvConversionTextureCoordinateAttributeNV12);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(yuvConversionPositionAttributeNV12);
+    glDisableVertexAttribArray(yuvConversionTextureCoordinateAttributeNV12);
 }
 
 - (void)convertYUVToRGBOutputI420;
@@ -830,7 +827,15 @@ NSString *const kGPUImageBgraConversionFragmentShaderStr = SHADER_STRING
     glVertexAttribPointer(yuvConversionPositionAttributeI420, 2, GL_FLOAT, 0, 0, squareVertices);
     glVertexAttribPointer(yuvConversionTextureCoordinateAttributeI420, 2, GL_FLOAT, 0, 0, [GPUImageFilter textureCoordinatesForRotation:internalRotation]);
 
+    glEnableVertexAttribArray(yuvConversionPositionAttributeI420);
+    glEnableVertexAttribArray(yuvConversionTextureCoordinateAttributeI420);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(yuvConversionPositionAttributeI420);
+    glDisableVertexAttribArray(yuvConversionTextureCoordinateAttributeI420);
+
+//    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
 - (void)convertBGRAToRGBOutput;
@@ -857,7 +862,14 @@ NSString *const kGPUImageBgraConversionFragmentShaderStr = SHADER_STRING
     glVertexAttribPointer(bgraConversionPositionAttribute, 2, GL_FLOAT, 0, 0, squareVertices);
     glVertexAttribPointer(bgraConversionTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [GPUImageFilter textureCoordinatesForRotation: kGPUImageRotate180]);
 
+    glEnableVertexAttribArray(bgraConversionPositionAttribute);
+    glEnableVertexAttribArray(bgraConversionTextureCoordinateAttribute);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(bgraConversionPositionAttribute);
+    glDisableVertexAttribArray(bgraConversionTextureCoordinateAttribute);
+
     check_gl_error();
 }
 

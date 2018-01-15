@@ -59,7 +59,6 @@ NSString *const kGPUImageTwoInputTextureVertexShaderString = SHADER_STRING
         filterSecondTextureCoordinateAttribute = [filterProgram attributeIndex:@"inputTextureCoordinate2"];
         
         filterInputTextureUniform2 = [filterProgram uniformIndex:@"inputImageTexture2"]; // This does assume a name of "inputImageTexture2" for second input texture in the fragment shader
-        glEnableVertexAttribArray(filterSecondTextureCoordinateAttribute);
     });
     
     return self;
@@ -118,7 +117,15 @@ NSString *const kGPUImageTwoInputTextureVertexShaderString = SHADER_STRING
 	glVertexAttribPointer(filterTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, textureCoordinates);
     glVertexAttribPointer(filterSecondTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [[self class] textureCoordinatesForRotation:inputRotation2]);
     
+    glEnableVertexAttribArray(filterPositionAttribute);
+    glEnableVertexAttribArray(filterTextureCoordinateAttribute);
+    glEnableVertexAttribArray(filterSecondTextureCoordinateAttribute);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(filterPositionAttribute);
+    glDisableVertexAttribArray(filterTextureCoordinateAttribute);
+    glDisableVertexAttribArray(filterSecondTextureCoordinateAttribute);
 
     [firstInputFramebuffer unlock];
     [secondInputFramebuffer unlock];

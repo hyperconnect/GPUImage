@@ -139,6 +139,10 @@
 	glEnableVertexAttribArray(dataTextureCoordinateAttribute);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    glDisableVertexAttribArray(dataPositionAttribute);
+    glDisableVertexAttribArray(dataTextureCoordinateAttribute);
+
     [firstInputFramebuffer unlock];
     [outputFramebuffer unlock];
 }

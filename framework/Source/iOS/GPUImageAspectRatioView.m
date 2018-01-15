@@ -386,7 +386,13 @@
         glVertexAttribPointer(displayPositionAttribute, 2, GL_FLOAT, 0, 0, imageVertices);
         glVertexAttribPointer(displayTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [GPUImageAspectRatioView textureCoordinatesForRotation:inputRotation]);
         
+        glEnableVertexAttribArray(displayPositionAttribute);
+        glEnableVertexAttribArray(displayTextureCoordinateAttribute);
+
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+        glDisableVertexAttribArray(displayPositionAttribute);
+        glDisableVertexAttribArray(displayTextureCoordinateAttribute);
         
         [self presentFramebuffer];
         [inputFramebufferForDisplay unlock];

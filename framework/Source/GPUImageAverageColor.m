@@ -153,7 +153,13 @@ NSString *const kGPUImageColorAveragingFragmentShaderString = SHADER_STRING
         glUniform1f(texelWidthUniform, 0.5 / currentStageSize.width);
         glUniform1f(texelHeightUniform, 0.5 / currentStageSize.height);
         
+        glEnableVertexAttribArray(filterPositionAttribute);
+        glEnableVertexAttribArray(filterTextureCoordinateAttribute);
+
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+        glDisableVertexAttribArray(filterPositionAttribute);
+        glDisableVertexAttribArray(filterTextureCoordinateAttribute);
 
         currentTexture = [outputFramebuffer texture];
         finalStageSize = currentStageSize;
