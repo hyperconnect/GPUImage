@@ -860,7 +860,7 @@ NSString *const kGPUImageBgraConversionFragmentShaderStr = SHADER_STRING
     glUniform1i(bgraConversionTextureUniform, 4);
 
     glVertexAttribPointer(bgraConversionPositionAttribute, 2, GL_FLOAT, 0, 0, squareVertices);
-    glVertexAttribPointer(bgraConversionTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [GPUImageFilter textureCoordinatesForRotation: kGPUImageRotate180]);
+    glVertexAttribPointer(bgraConversionTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [GPUImageFilter textureCoordinatesForRotation: internalRotation]);
 
     glEnableVertexAttribArray(bgraConversionPositionAttribute);
     glEnableVertexAttribArray(bgraConversionTextureCoordinateAttribute);
