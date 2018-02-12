@@ -140,8 +140,8 @@
         runSynchronouslyOnVideoProcessingQueue(^{
             [self destroyDisplayFramebuffer];
             [self createDisplayFramebuffer];
-            [self recalculateViewGeometry];
         });
+        [self recalculateViewGeometry];
     }
 }
 
@@ -230,11 +230,11 @@
 
 - (void)recalculateViewGeometry;
 {
+    CGSize currentViewSize = self.bounds.size;
+
     runSynchronouslyOnVideoProcessingQueue(^{
         CGFloat heightScaling, widthScaling;
-        
-        CGSize currentViewSize = self.bounds.size;
-        
+
         //    CGFloat imageAspectRatio = inputImageSize.width / inputImageSize.height;
         //    CGFloat viewAspectRatio = currentViewSize.width / currentViewSize.height;
         
@@ -430,7 +430,10 @@
         if (!CGSizeEqualToSize(inputImageSize, rotatedSize))
         {
             inputImageSize = rotatedSize;
-            [self recalculateViewGeometry];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self recalculateViewGeometry];
+            });
         }
     });
 }
