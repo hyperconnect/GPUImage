@@ -13,6 +13,8 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '5.0'
   s.ios.exclude_files = 'framework/Source/Mac',
+                        'framework/Source/GPUImageBgraVideoOutput.h',
+                        'framework/Source/GPUImageBgraVideoOutput.m',
                         'framework/Source/GPUImage3x3ConvolutionFilter.h',
                         'framework/Source/GPUImage3x3ConvolutionFilter.m',
                         'framework/Source/GPUImage3x3TextureSamplingFilter.h',
