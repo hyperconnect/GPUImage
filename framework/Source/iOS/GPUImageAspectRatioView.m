@@ -233,7 +233,10 @@
     runSynchronouslyOnVideoProcessingQueue(^{
         CGFloat heightScaling, widthScaling;
         
-        CGSize currentViewSize = self.bounds.size;
+        __block CGSize currentViewSize;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            currentViewSize = self.bounds.size;
+        });
         
         //    CGFloat imageAspectRatio = inputImageSize.width / inputImageSize.height;
         //    CGFloat viewAspectRatio = currentViewSize.width / currentViewSize.height;
