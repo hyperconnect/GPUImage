@@ -163,3 +163,5 @@
 //#import "GPUImageWeakPixelInclusionFilter.h"
 //#import "GPUImageFourInputFilter.h"
 
+#import "GPUImageYuvDataOutput.h"
+#import "GPUImageAspectRatioView.h"
