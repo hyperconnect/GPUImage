@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name     = 'GPUImage'
-  s.version  = '1.0.4'
+  s.version  = '1.0.5-bora'
   s.license  = 'BSD'
   s.summary  = 'An open source iOS framework for GPU-based image and video processing.'
   s.homepage = 'https://github.com/BradLarson/GPUImage'
   s.author   = { 'Brad Larson' => 'contact@sunsetlakesoftware.com' }
-  s.source   = { :git => 'https://github.com/hyperconnect/GPUImage.git', :tag => "azar-v#{s.version.to_s}" }
+  s.source   = { :git => 'https://github.com/hyperconnect/GPUImage.git', :tag => "v#{s.version.to_s}" }
 
   s.source_files = 'framework/Source/**/*.{h,m}'
   s.requires_arc = true
