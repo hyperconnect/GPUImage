@@ -232,22 +232,14 @@
 {
     runSynchronouslyOnVideoProcessingQueue(^{
         CGFloat heightScaling, widthScaling;
-
-        __block CGRect currentBounds;
-        if (![NSThread isMainThread]) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                currentBounds = self.bounds;
-            });
-        } else {
-            currentBounds = self.bounds;
-        }
-
+        
+        CGSize currentViewSize = self.bounds.size;
+        
         //    CGFloat imageAspectRatio = inputImageSize.width / inputImageSize.height;
         //    CGFloat viewAspectRatio = currentViewSize.width / currentViewSize.height;
-
-        CGSize currentViewSize = currentBounds.size;
-        CGRect insetRect = AVMakeRectWithAspectRatioInsideRect(inputImageSize, currentBounds);
-
+        
+        CGRect insetRect = AVMakeRectWithAspectRatioInsideRect(inputImageSize, self.bounds);
+        
         switch(_fillMode)
         {
             case kGPUImageFillModeStretch:
